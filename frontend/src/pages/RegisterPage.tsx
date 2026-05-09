@@ -56,7 +56,14 @@ export const RegisterPage = () => {
           type="password"
           autoComplete="new-password"
           error={formState.errors.password?.message}
-          {...register("password", { required: "Password is required", minLength: 8 })}
+          {...register("password", { 
+            required: "Password is required", 
+            minLength: { value: 8, message: "Password must be at least 8 characters long" },
+            pattern: {
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+              message: "Password must include one uppercase letter, one lowercase letter, and one number."
+            }
+          })}
         />
         <button
           type="submit"
